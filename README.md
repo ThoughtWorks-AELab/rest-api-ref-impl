@@ -2,8 +2,6 @@
 
 ## What's Next
 
-GET /posts/{id}/comments
-
 POST /comments
 (with a post id)
 

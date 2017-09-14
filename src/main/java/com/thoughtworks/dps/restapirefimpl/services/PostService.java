@@ -1,7 +1,7 @@
 package com.thoughtworks.dps.restapirefimpl.services;
 
 import com.thoughtworks.dps.restapirefimpl.entities.Post;
-import com.thoughtworks.dps.restapirefimpl.entities.PostRequest;
+import com.thoughtworks.dps.restapirefimpl.resources.PostRequest;
 import com.thoughtworks.dps.restapirefimpl.entities.User;
 import com.thoughtworks.dps.restapirefimpl.exceptions.ForbiddenException;
 import com.thoughtworks.dps.restapirefimpl.exceptions.NotFoundException;
@@ -73,5 +73,9 @@ public class PostService {
             throw new ForbiddenException();
         }
         throw new NotFoundException();
+    }
+
+    public boolean exists(String postId) {
+        return posts.containsKey(postId);
     }
 }

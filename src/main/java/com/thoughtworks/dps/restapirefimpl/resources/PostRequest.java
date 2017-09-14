@@ -1,4 +1,4 @@
-package com.thoughtworks.dps.restapirefimpl.entities;
+package com.thoughtworks.dps.restapirefimpl.resources;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

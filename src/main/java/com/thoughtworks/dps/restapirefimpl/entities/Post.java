@@ -1,5 +1,11 @@
 package com.thoughtworks.dps.restapirefimpl.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Post {
 
     private final String id;
@@ -39,4 +45,5 @@ public class Post {
     public Post withDraft(boolean draft) {
         return new Post(this.id, this.title, this.body, this.author, draft);
     }
+
 }
