@@ -3,6 +3,7 @@
 ## What's Next
 
 What's a reference implementation? Here's our defn - max
+What this is not - an accelerator or starter kit
 Clean up swagger - elise
 Postman collection - elise
 Add blurby bit - max
