@@ -4,6 +4,7 @@ import com.thoughtworks.dps.restapirefimpl.entities.Post;
 import com.thoughtworks.dps.restapirefimpl.entities.PostRequest;
 import com.thoughtworks.dps.restapirefimpl.entities.User;
 import com.thoughtworks.dps.restapirefimpl.exceptions.BadRequestException;
+import com.thoughtworks.dps.restapirefimpl.exceptions.ForbiddenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,9 @@ import java.util.*;
 @Service
 public class PostService {
     private final Map<String, Post> posts = new HashMap<>();
-    private UserService userService;
 
     @Autowired
-    public PostService(UserService userService) {
-        this.userService = userService;
+    public PostService() {
         posts.put("1", new Post("1", "Yay", "words", User.USERS.get(0)));
     }
     public Collection<Post> getPosts() {
@@ -32,14 +31,18 @@ public class PostService {
     }
 
     public Optional<Post> getPost(String id) {
-        return null;
+        return Optional.ofNullable(posts.get(id));
     }
 
-    public Optional<Post> deleteById(String id) {
+    public Optional<Post> deleteById(String id, User user) {
         Optional<Post> post = Optional.ofNullable(posts.get(id));
         if (!post.isPresent()) {
             return post;
         }
-        return null;
+        if (post.get().getAuthor().equals(user)) {
+            posts.remove(id);
+            return post;
+        }
+        throw new ForbiddenException();
     }
 }

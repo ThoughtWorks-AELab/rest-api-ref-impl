@@ -55,9 +55,11 @@ public class PostController {
         Post post = postService.getPost(id).orElseThrow(NotFoundException::new);
         return new ResponseEntity<>(post, OK);
     }
-//
-//    @RequestMapping(path = "/{id}", method = DELETE)
-//    public ResponseEntity<Post> delete(@PathVariable String id, Principal principal) {
-//        Post post = postService.deleteById(id).orElseThrow(NotFoundException::new);
-//    }
+
+    @RequestMapping(path = "/{id}", method = DELETE)
+    public ResponseEntity<Post> delete(@PathVariable String id, Principal principal) {
+        User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+        Post post = postService.deleteById(id, user).orElseThrow(NotFoundException::new);
+        return new ResponseEntity<Post>(post, OK);
+    }
 }
