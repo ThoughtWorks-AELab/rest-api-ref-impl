@@ -1,8 +1,6 @@
 package com.thoughtworks.dps.restapirefimpl.controllers;
 
-import com.thoughtworks.dps.restapirefimpl.entities.PostCollection;
 import com.thoughtworks.dps.restapirefimpl.entities.User;
-import com.thoughtworks.dps.restapirefimpl.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +17,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class UserController {
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController() {
     }
 
     @RequestMapping(path = "/current", method = GET)

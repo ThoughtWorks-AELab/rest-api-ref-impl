@@ -62,6 +62,13 @@ public class PostController {
         return new ResponseEntity<Post>(post, OK);
     }
 
+    @RequestMapping(path = "/{id}/publish", method = POST)
+    public ResponseEntity<Post> publish(@PathVariable String id, Principal principal) {
+        User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+        postService.publish(id, user);
+        return new ResponseEntity<Post>(NO_CONTENT);
+    }
+
     @RequestMapping(path = "/{id}", method = PUT)
     public ResponseEntity<Post> put(@PathVariable String id, @RequestBody PostRequest post, Principal principal) {
         User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
