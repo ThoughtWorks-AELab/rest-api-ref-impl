@@ -17,10 +17,9 @@ import java.security.Principal;
 import java.util.Collection;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @RequestMapping("/posts")
@@ -61,5 +60,12 @@ public class PostController {
         User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
         Post post = postService.deleteById(id, user).orElseThrow(NotFoundException::new);
         return new ResponseEntity<Post>(post, OK);
+    }
+
+    @RequestMapping(path = "/{id}", method = PUT)
+    public ResponseEntity<Post> put(@PathVariable String id, @RequestBody PostRequest post, Principal principal) {
+        User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+        postService.updatePost(id, post, user);
+        return new ResponseEntity<Post>(NO_CONTENT);
     }
 }

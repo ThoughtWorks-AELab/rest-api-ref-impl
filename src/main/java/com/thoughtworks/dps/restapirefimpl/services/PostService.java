@@ -5,6 +5,7 @@ import com.thoughtworks.dps.restapirefimpl.entities.PostRequest;
 import com.thoughtworks.dps.restapirefimpl.entities.User;
 import com.thoughtworks.dps.restapirefimpl.exceptions.BadRequestException;
 import com.thoughtworks.dps.restapirefimpl.exceptions.ForbiddenException;
+import com.thoughtworks.dps.restapirefimpl.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,23 @@ public class PostService {
             return post;
         }
         throw new ForbiddenException();
+    }
+
+    public void updatePost(String id, PostRequest postRequest, User user) {
+        Optional<Post> post = Optional.ofNullable(posts.get(id));
+        if (post.isPresent()) {
+            if (post.get().getAuthor().equals(user)) {
+                Post updatedPost = new Post(
+                        id,
+                        postRequest.getTitle(),
+                        postRequest.getBody(),
+                        user
+                );
+                posts.put(id, updatedPost);
+                return;
+            }
+            throw new ForbiddenException();
+        }
+        throw new NotFoundException();
     }
 }

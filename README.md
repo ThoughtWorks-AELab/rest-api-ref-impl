@@ -2,8 +2,6 @@
 
 ## What's Next
 
-PUT /posts/{id}
-
 POST /posts/{id}/publish [nested post/tunnel? reified?]
 
 GET /users/current [reified]
