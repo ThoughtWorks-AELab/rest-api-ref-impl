@@ -4,8 +4,6 @@
 
 POST /posts/{id}/publish [nested post/tunnel? reified?]
 
-GET /users/current [reified]
-
 GET /posts/{id}/comments
 
 POST /comments
