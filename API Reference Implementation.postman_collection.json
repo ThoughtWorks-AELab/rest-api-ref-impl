@@ -1,0 +1,290 @@
+{
+	"variables": [],
+	"info": {
+		"name": "API Reference Implementation",
+		"_postman_id": "a3e87d54-b94f-a6db-8c77-2dddf2474d82",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "(Unauthenticated) GET /posts",
+			"request": {
+				"url": "localhost:8080/v1/posts",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get all the posts"
+			},
+			"response": []
+		},
+		{
+			"name": "(Authenticated - Alice) GET /posts",
+			"request": {
+				"url": "http://localhost:8080/v1/posts",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer qwerty",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get all posts"
+			},
+			"response": []
+		},
+		{
+			"name": "(Authenticated - Alice) GET /users/current",
+			"request": {
+				"url": "http://localhost:8080/v1/users/current",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer qwerty",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get the current user"
+			},
+			"response": []
+		},
+		{
+			"name": "(Authenticated - Alice) GET /posts/1",
+			"request": {
+				"url": "http://localhost:8080/v1/posts/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer qwerty",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get a single post"
+			},
+			"response": []
+		},
+		{
+			"name": "(Authenticated - Alice) POST /posts",
+			"request": {
+				"url": "http://localhost:8080/v1/posts",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer qwerty",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"cashews are the cat's meow\"\n}"
+				},
+				"description": "Create a new post"
+			},
+			"response": []
+		},
+		{
+			"name": "(Authenticated - Alice) PUT /posts/1",
+			"request": {
+				"url": "http://localhost:8080/v1/posts/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer qwerty",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"almonds are the cat's meow\"\n}"
+				},
+				"description": "Update an existing post"
+			},
+			"response": []
+		},
+		{
+			"name": "(Authenticated - Bob) PUT /posts/1",
+			"request": {
+				"url": "http://localhost:8080/v1/posts/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer foobar",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"almonds are the cat's meow\"\n}"
+				},
+				"description": "As Bob, attempt to update Alice's post"
+			},
+			"response": []
+		},
+		{
+			"name": "(Authenticated - Alice) POST /posts/1/publish",
+			"request": {
+				"url": "http://localhost:8080/v1/posts/1/publish",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer qwerty",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"cashews are the cat's meow\"\n}"
+				},
+				"description": "Publish a post"
+			},
+			"response": []
+		},
+		{
+			"name": "(Authenticated - Alice) GET /posts",
+			"request": {
+				"url": "http://localhost:8080/v1/posts",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer qwerty",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get all posts (see that one is published)"
+			},
+			"response": []
+		},
+		{
+			"name": "(Authenticated - Bob) POST /comments",
+			"request": {
+				"url": "http://localhost:8080/v1/comments",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer foobar",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"postId\": \"1\",\n\t\"body\": \"hard disagree, almonds are the cat's meow\"\n}"
+				},
+				"description": "As Bob, comment on Alice's post"
+			},
+			"response": []
+		},
+		{
+			"name": "(Authenticated - Bob) GET /posts/1comments",
+			"request": {
+				"url": "http://localhost:8080/v1/posts/1/comments",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer foobar",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"almonds are the cat's meow\"\n}"
+				},
+				"description": "Get all comments on a post"
+			},
+			"response": []
+		},
+		{
+			"name": "(Authenticated - Alice) DELETE /posts/1",
+			"request": {
+				"url": "http://localhost:8080/v1/posts/1",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer qwerty",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Delete an existing post"
+			},
+			"response": []
+		},
+		{
+			"name": "(Authenticated - Alice, Invalid post) DELETE /posts/1",
+			"request": {
+				"url": "http://localhost:8080/v1/posts/42",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer qwerty",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Attempt to delete a post that does not exist"
+			},
+			"response": []
+		}
+	]
+}
