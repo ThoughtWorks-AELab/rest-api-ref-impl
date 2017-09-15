@@ -20,6 +20,10 @@ paths:
                 $ref: '#/components/schemas/Comment'
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       requestBody:
         content:
           application/json:
@@ -29,10 +33,10 @@ paths:
 
   /posts:
     get:
-      summary: gets all posts
+      summary: Gets all posts.
       operationId: getPosts
       description: |
-        Get all posts.
+        Gets all posts.
       responses:
         '200':
           description: All the posts
@@ -41,24 +45,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/PostCollection'
     post:
-      summary: creates a new post
+      summary: Creates a new post
       operationId: createPost
       description: It makes a new post authored by you, the current user
       responses:
         '201':
-          description: item created
+          description: Created post
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Post'
         '400':
-          description: you messed up the input
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PostRequest'
-        description: the new post
+        description: The new post
 
   /posts/{id}:
     parameters:
@@ -67,64 +75,80 @@ paths:
           schema:
             type: integer
           required: true
-          description: ID of the post to get
+          description: ID of the post
 
     get:
-      summary: get one post
+      summary: Get a single post
       operationId: getPost
-      description: no
+      description: Gets a single post
       responses:
         '200':
-          description: GREAT SUCCESS
+          description: The post identified by the ID
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Post'
         '404':
           description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     put:
-      summary: update
-      operationId: updatePpost
-      description: blah
+      summary: Update a single post
+      operationId: updatePost
+      description: Updates a single post
       responses:
         '204':
           description: updated
         '403':
-          description: 🚫
+          description: You are not authorized to update this post
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PostRequest'
     delete:
-      summary: delete
+      summary: Delete a single post
       operationId: deletePost
-      description: blah
+      description: Deletes a single post
       responses:
         '200':
-          description: all gone
+          description: The deleted resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
         '403':
-          description: not allowed
+          description: You are not authorized to delete this post
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /posts/{id}/comments:
     get:
-      summary: get comments for post
+      summary: Get all comments for a post
       operationId: getPostComments
-      description: blah
+      description: Get all comments for a post
       responses:
         '200':
-          description: you got them all
+          description: Comments on the post
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommentCollection'
   /users/current:
     get:
-      summary: get yo'self
-      operationId: blah
-      description: blah
+      summary: Get the current user
+      operationId: getCurrentUser
+      description: Gets the current user
       responses:
         '200':
-          description: blah
+          description: The current user
           content:
             application/json:
               schema:
@@ -150,7 +174,7 @@ components:
         body:
           type: string
           example: |
-            to be or not to be, that is the question
+            To be or not to be, that is the question
         author:
           $ref: '#/components/schemas/User'
     PostRequest:
@@ -194,3 +218,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Comment'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Oops! That is not a valid id
+        error:
+          type: string
+          example: Forbidden
+        path:
+          type: string
+          example: /v1/posts
