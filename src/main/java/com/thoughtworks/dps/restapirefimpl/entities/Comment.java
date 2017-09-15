@@ -2,19 +2,20 @@ package com.thoughtworks.dps.restapirefimpl.entities;
 
 import com.thoughtworks.dps.restapirefimpl.resources.CommentRequest;
 
-import java.security.Principal;
 import java.util.UUID;
 
 public class Comment {
     private final String id;
     private final String postId;
     private final String body;
+    private final User author;
 
-    public Comment(String id, String postId, String body) {
+    public Comment(String id, String postId, String body, User principal) {
 
         this.id = id;
         this.postId = postId;
         this.body = body;
+        this.author = principal;
     }
 
     public String getPostId() {
@@ -22,7 +23,7 @@ public class Comment {
     }
 
     public static Comment fromRequest(CommentRequest commentRequest) {
-        return new Comment(UUID.randomUUID().toString(), commentRequest.getPostId(), commentRequest.getBody());
+        return new Comment(UUID.randomUUID().toString(), commentRequest.getPostId(), commentRequest.getBody(), null);
     }
 
     public String getId() {
@@ -34,6 +35,10 @@ public class Comment {
     }
 
     public Comment withAuthor(User principal) {
-        return null;
+        return new Comment(id, postId, body, principal);
+    }
+
+    public User getAuthor() {
+        return author;
     }
 }
