@@ -1,12 +1,6 @@
 package com.thoughtworks.dps.restapirefimpl.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class Post {
+public class Article {
 
     private final String id;
     private final String title;
@@ -14,7 +8,7 @@ public class Post {
     private final User author;
     private final boolean draft;
 
-    public Post(String id, String title, String body, User author, boolean draft) {
+    public Article(String id, String title, String body, User author, boolean draft) {
         this.id = id;
         this.title = title;
         this.body = body;
@@ -42,8 +36,8 @@ public class Post {
         return draft;
     }
 
-    public Post withDraft(boolean draft) {
-        return new Post(this.id, this.title, this.body, this.author, draft);
+    public Article withDraft(boolean draft) {
+        return new Article(this.id, this.title, this.body, this.author, draft);
     }
 
 }

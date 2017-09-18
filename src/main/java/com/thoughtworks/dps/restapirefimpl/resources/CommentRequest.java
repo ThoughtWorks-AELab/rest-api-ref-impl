@@ -4,19 +4,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CommentRequest {
 
-    private final String postId;
+    private final String articleId;
     private final String body;
 
     public CommentRequest(
-            @JsonProperty("postId") String postId,
+            @JsonProperty("articleId") String articleId,
             @JsonProperty("body") String body) {
 
-        this.postId = postId;
+        this.articleId = articleId;
         this.body = body;
     }
 
-    public String getPostId() {
-        return postId;
+    public String getArticleId() {
+        return articleId;
     }
 
     public String getBody() {

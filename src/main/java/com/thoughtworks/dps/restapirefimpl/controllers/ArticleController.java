@@ -3,10 +3,10 @@ package com.thoughtworks.dps.restapirefimpl.controllers;
 import com.thoughtworks.dps.restapirefimpl.entities.*;
 import com.thoughtworks.dps.restapirefimpl.exceptions.NotFoundException;
 import com.thoughtworks.dps.restapirefimpl.resources.CommentCollection;
-import com.thoughtworks.dps.restapirefimpl.resources.PostCollection;
-import com.thoughtworks.dps.restapirefimpl.resources.PostRequest;
+import com.thoughtworks.dps.restapirefimpl.resources.ArticleCollection;
+import com.thoughtworks.dps.restapirefimpl.resources.ArticleRequest;
 import com.thoughtworks.dps.restapirefimpl.services.CommentService;
-import com.thoughtworks.dps.restapirefimpl.services.PostService;
+import com.thoughtworks.dps.restapirefimpl.services.ArticleService;
 import com.thoughtworks.dps.restapirefimpl.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,66 +24,66 @@ import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
-@RequestMapping("/posts")
-public class PostController {
+@RequestMapping("/articles")
+public class ArticleController {
 
-    PostService postService;
+    ArticleService articleService;
     private UserService userService;
     private CommentService commentService;
 
     @Autowired
-    public PostController(PostService postService, UserService userService, CommentService commentService) {
-        this.postService = postService;
+    public ArticleController(ArticleService articleService, UserService userService, CommentService commentService) {
+        this.articleService = articleService;
         this.userService = userService;
         this.commentService = commentService;
     }
 
     @RequestMapping(method = GET)
-    public ResponseEntity<PostCollection> getAll() {
-        Collection<Post> posts = postService.getPosts();
-        PostCollection response = new PostCollection(posts);
+    public ResponseEntity<ArticleCollection> getAll() {
+        Collection<Article> articles = articleService.getArticles();
+        ArticleCollection response = new ArticleCollection(articles);
         return new ResponseEntity<>(response, OK);
     }
 
     @RequestMapping(method = POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Post> create(@RequestBody PostRequest post, Principal principal) {
+    public ResponseEntity<Article> create(@RequestBody ArticleRequest article, Principal principal) {
         //yuck
         User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
-        Post createdPost = postService.createPost(post, user);
-        return new ResponseEntity<>(createdPost, CREATED);
+        Article createdArticle = articleService.createArticle(article, user);
+        return new ResponseEntity<>(createdArticle, CREATED);
     }
 
     @RequestMapping(path = "/{id}", method = GET)
-    public ResponseEntity<Post> getOne(@PathVariable String id) {
-        Post post = postService.getPost(id).orElseThrow(NotFoundException::new);
-        return new ResponseEntity<>(post, OK);
+    public ResponseEntity<Article> getOne(@PathVariable String id) {
+        Article article = articleService.getArticle(id).orElseThrow(NotFoundException::new);
+        return new ResponseEntity<>(article, OK);
     }
 
     @RequestMapping(path = "/{id}", method = DELETE)
-    public ResponseEntity<Post> delete(@PathVariable String id, Principal principal) {
+    public ResponseEntity<Article> delete(@PathVariable String id, Principal principal) {
         User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
-        Post post = postService.deleteById(id, user).orElseThrow(NotFoundException::new);
-        return new ResponseEntity<Post>(post, OK);
+        Article article = articleService.deleteById(id, user).orElseThrow(NotFoundException::new);
+        return new ResponseEntity<Article>(article, OK);
     }
 
     @RequestMapping(path = "/{id}/publish", method = POST)
-    public ResponseEntity<Post> publish(@PathVariable String id, Principal principal) {
+    public ResponseEntity<Article> publish(@PathVariable String id, Principal principal) {
         User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
-        postService.publish(id, user);
-        return new ResponseEntity<Post>(NO_CONTENT);
+        articleService.publish(id, user);
+        return new ResponseEntity<Article>(NO_CONTENT);
     }
 
     @RequestMapping(path = "/{id}", method = PUT)
-    public ResponseEntity<Post> put(@PathVariable String id, @RequestBody PostRequest post, Principal principal) {
+    public ResponseEntity<Article> put(@PathVariable String id, @RequestBody ArticleRequest article, Principal principal) {
         User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
-        postService.updatePost(id, post, user);
-        return new ResponseEntity<Post>(NO_CONTENT);
+        articleService.updateArticle(id, article, user);
+        return new ResponseEntity<Article>(NO_CONTENT);
     }
 
     @RequestMapping(path = "/{id}/comments", method = GET)
     public ResponseEntity<CommentCollection> getComments(@PathVariable String id) {
-        postService.getPost(id).orElseThrow(NotFoundException::new);
-        List<Comment> comments = commentService.getCommentsForPost(id);
+        articleService.getArticle(id).orElseThrow(NotFoundException::new);
+        List<Comment> comments = commentService.getCommentsForArticle(id);
         return new ResponseEntity<CommentCollection>(new CommentCollection(comments), OK);
     }
 }

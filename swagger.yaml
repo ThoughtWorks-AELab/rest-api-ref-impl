@@ -31,30 +31,30 @@ paths:
               $ref: '#/components/schemas/CommentRequest'
         description: The new comment
 
-  /posts:
+  /articles:
     get:
-      summary: Gets all posts.
-      operationId: getPosts
+      summary: Gets all articles.
+      operationId: getArticles
       description: |
-        Gets all posts.
+        Gets all articles.
       responses:
         '200':
-          description: All the posts
+          description: All the articles
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PostCollection'
+                $ref: '#/components/schemas/ArticleCollection'
     post:
-      summary: Creates a new post
-      operationId: createPost
-      description: It makes a new post authored by you, the current user
+      summary: Creates a new article
+      operationId: createArticle
+      description: It makes a new article authored by you, the current user
       responses:
         '201':
-          description: Created post
+          description: Created article
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Post'
+                $ref: '#/components/schemas/Article'
         '400':
           description: Bad request
           content:
@@ -65,29 +65,29 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PostRequest'
-        description: The new post
+              $ref: '#/components/schemas/ArticleRequest'
+        description: The new article
 
-  /posts/{id}:
+  /articles/{id}:
     parameters:
         - in: path
           name: id
           schema:
             type: integer
           required: true
-          description: ID of the post
+          description: ID of the article
 
     get:
-      summary: Get a single post
-      operationId: getPost
-      description: Gets a single post
+      summary: Get a single article
+      operationId: getArticle
+      description: Gets a single article
       responses:
         '200':
-          description: The post identified by the ID
+          description: The article identified by the ID
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Post'
+                $ref: '#/components/schemas/Article'
         '404':
           description: Not found
           content:
@@ -95,14 +95,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     put:
-      summary: Update a single post
-      operationId: updatePost
-      description: Updates a single post
+      summary: Update a single article
+      operationId: updateArticle
+      description: Updates a single article
       responses:
         '204':
-          description: updated
+          description: Updated article successfully
         '403':
-          description: You are not authorized to update this post
+          description: You are not authorized to update this article
           content:
             application/json:
               schema:
@@ -111,32 +111,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PostRequest'
+              $ref: '#/components/schemas/ArticleRequest'
     delete:
-      summary: Delete a single post
+      summary: Delete a single article
       operationId: deletePost
-      description: Deletes a single post
+      description: Deletes a single article
       responses:
         '200':
           description: The deleted resource
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Post'
+                $ref: '#/components/schemas/Article'
         '403':
-          description: You are not authorized to delete this post
+          description: You are not authorized to delete this article
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /posts/{id}/comments:
+  /articles/{id}/comments:
     get:
-      summary: Get all comments for a post
-      operationId: getPostComments
-      description: Get all comments for a post
+      summary: Get all comments for an article
+      operationId: getArticleComments
+      description: Get all comments for an article
       responses:
         '200':
-          description: Comments on the post
+          description: Comments on the article
           content:
             application/json:
               schema:
@@ -161,7 +161,7 @@ components:
         name:
           type: string
           example: Joan Baez
-    Post:
+    Article:
       type: object
       properties:
         id:
@@ -177,20 +177,20 @@ components:
             To be or not to be, that is the question
         author:
           $ref: '#/components/schemas/User'
-    PostRequest:
+    ArticleRequest:
       type: object
       properties:
         title:
           type: string
         body:
           type: string
-    PostCollection:
+    ArticleCollection:
       type: object
       properties:
-        posts:
+        articles:
           type: array
           items:
-            $ref: '#/components/schemas/Post'
+            $ref: '#/components/schemas/Article'
     Comment:
       type: object
       properties:
@@ -199,7 +199,7 @@ components:
           example: great job!
         id:
           type: string
-        postId:
+        articleId:
           type: string
           format: uuid
     CommentRequest:
@@ -207,14 +207,14 @@ components:
       properties:
         body:
           type: string
-          example: love this post
-        postId:
+          example: love this article
+        articleId:
           type: string
           example: 123456-abcdef-qwerty-foobar
     CommentCollection:
       type: object
       properties:
-        posts:
+        articles:
           type: array
           items:
             $ref: '#/components/schemas/Comment'
@@ -229,4 +229,4 @@ components:
           example: Forbidden
         path:
           type: string
-          example: /v1/posts
+          example: /v1/articles

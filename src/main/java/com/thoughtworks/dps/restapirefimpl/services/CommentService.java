@@ -16,22 +16,22 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class CommentService {
     Map<String, Comment> comments = new HashMap<>();
-    private PostService postService;
+    private ArticleService articleService;
 
     @Autowired
-    public CommentService(PostService postService) {
-        this.postService = postService;
+    public CommentService(ArticleService articleService) {
+        this.articleService = articleService;
     }
 
-    public List<Comment> getCommentsForPost(String id) {
+    public List<Comment> getCommentsForArticle(String id) {
         return comments.values().stream()
-                .filter(c -> c.getPostId().equals(id))
+                .filter(c -> c.getArticleId().equals(id))
                 .collect(toList());
     }
 
     public Comment createComment(CommentRequest commentRequest, User principal) {
-        if (!postService.exists(commentRequest.getPostId())) {
-            throw new BadRequestException(String.format("no post with id %s", commentRequest.getPostId()));
+        if (!articleService.exists(commentRequest.getArticleId())) {
+            throw new BadRequestException(String.format("no article with id %s", commentRequest.getArticleId()));
         }
         Comment comment = Comment.fromRequest(commentRequest).withAuthor(principal);
         comments.put(comment.getId(), comment);

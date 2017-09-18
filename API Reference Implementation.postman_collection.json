@@ -8,9 +8,9 @@
 	},
 	"item": [
 		{
-			"name": "(Unauthenticated) GET /posts",
+			"name": "(Unauthenticated) GET /articles",
 			"request": {
-				"url": "localhost:8080/v1/posts",
+				"url": "localhost:8080/v1/articles",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -19,9 +19,9 @@
 			"response": []
 		},
 		{
-			"name": "(Authenticated - Alice) GET /posts",
+			"name": "(Authenticated - Alice) GET /articles",
 			"request": {
-				"url": "http://localhost:8080/v1/posts",
+				"url": "http://localhost:8080/v1/articles",
 				"method": "GET",
 				"header": [
 					{
@@ -53,9 +53,9 @@
 			"response": []
 		},
 		{
-			"name": "(Authenticated - Alice) GET /posts/1",
+			"name": "(Authenticated - Alice) GET /articles/1",
 			"request": {
-				"url": "http://localhost:8080/v1/posts/1",
+				"url": "http://localhost:8080/v1/articles/1",
 				"method": "GET",
 				"header": [
 					{
@@ -65,14 +65,14 @@
 					}
 				],
 				"body": {},
-				"description": "Get a single post"
+				"description": "Get a single article"
 			},
 			"response": []
 		},
 		{
-			"name": "(Authenticated - Alice) POST /posts",
+			"name": "(Authenticated - Alice) POST /articles",
 			"request": {
-				"url": "http://localhost:8080/v1/posts",
+				"url": "http://localhost:8080/v1/articles",
 				"method": "POST",
 				"header": [
 					{
@@ -88,16 +88,16 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"cashews are the cat's meow\"\n}"
+					"raw": "{\n\t\"title\": \"my first awesome article\",\n\t\"body\": \"cashews are the cat's meow\"\n}"
 				},
-				"description": "Create a new post"
+				"description": "Create a new article"
 			},
 			"response": []
 		},
 		{
-			"name": "(Authenticated - Alice) PUT /posts/1",
+			"name": "(Authenticated - Alice) PUT /articles/1",
 			"request": {
-				"url": "http://localhost:8080/v1/posts/1",
+				"url": "http://localhost:8080/v1/articles/1",
 				"method": "PUT",
 				"header": [
 					{
@@ -113,16 +113,16 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"almonds are the cat's meow\"\n}"
+					"raw": "{\n\t\"title\": \"my first awesome update\",\n\t\"body\": \"almonds are the cat's meow\"\n}"
 				},
-				"description": "Update an existing post"
+				"description": "Update an existing article"
 			},
 			"response": []
 		},
 		{
-			"name": "(Authenticated - Bob) PUT /posts/1",
+			"name": "(Authenticated - Bob) PUT /articles/1",
 			"request": {
-				"url": "http://localhost:8080/v1/posts/1",
+				"url": "http://localhost:8080/v1/articles/1",
 				"method": "PUT",
 				"header": [
 					{
@@ -140,14 +140,14 @@
 					"mode": "raw",
 					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"almonds are the cat's meow\"\n}"
 				},
-				"description": "As Bob, attempt to update Alice's post"
+				"description": "As Bob, attempt to update Alice's article"
 			},
 			"response": []
 		},
 		{
-			"name": "(Authenticated - Alice) POST /posts/1/publish",
+			"name": "(Authenticated - Alice) POST /articles/1/publish",
 			"request": {
-				"url": "http://localhost:8080/v1/posts/1/publish",
+				"url": "http://localhost:8080/v1/articles/1/publish",
 				"method": "POST",
 				"header": [
 					{
@@ -165,14 +165,14 @@
 					"mode": "raw",
 					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"cashews are the cat's meow\"\n}"
 				},
-				"description": "Publish a post"
+				"description": "Publish an article"
 			},
 			"response": []
 		},
 		{
-			"name": "(Authenticated - Alice) GET /posts",
+			"name": "(Authenticated - Alice) GET /articles",
 			"request": {
-				"url": "http://localhost:8080/v1/posts",
+				"url": "http://localhost:8080/v1/articles",
 				"method": "GET",
 				"header": [
 					{
@@ -182,7 +182,7 @@
 					}
 				],
 				"body": {},
-				"description": "Get all posts (see that one is published)"
+				"description": "Get all articles (see that one is published)"
 			},
 			"response": []
 		},
@@ -205,16 +205,16 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"postId\": \"1\",\n\t\"body\": \"hard disagree, almonds are the cat's meow\"\n}"
+					"raw": "{\n\t\"articleId\": \"1\",\n\t\"body\": \"hard disagree, almonds are the cat's meow\"\n}"
 				},
-				"description": "As Bob, comment on Alice's post"
+				"description": "As Bob, comment on Alice's article"
 			},
 			"response": []
 		},
 		{
-			"name": "(Authenticated - Bob) GET /posts/1comments",
+			"name": "(Authenticated - Bob) GET /articles/1comments",
 			"request": {
-				"url": "http://localhost:8080/v1/posts/1/comments",
+				"url": "http://localhost:8080/v1/articles/1/comments",
 				"method": "GET",
 				"header": [
 					{
@@ -232,14 +232,14 @@
 					"mode": "raw",
 					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"almonds are the cat's meow\"\n}"
 				},
-				"description": "Get all comments on a post"
+				"description": "Get all comments on an article"
 			},
 			"response": []
 		},
 		{
-			"name": "(Authenticated - Alice) DELETE /posts/1",
+			"name": "(Authenticated - Alice) DELETE /articles/1",
 			"request": {
-				"url": "http://localhost:8080/v1/posts/1",
+				"url": "http://localhost:8080/v1/articles/1",
 				"method": "DELETE",
 				"header": [
 					{
@@ -262,9 +262,9 @@
 			"response": []
 		},
 		{
-			"name": "(Authenticated - Alice, Invalid post) DELETE /posts/1",
+			"name": "(Authenticated - Alice, Invalid article) DELETE /articles/1",
 			"request": {
-				"url": "http://localhost:8080/v1/posts/42",
+				"url": "http://localhost:8080/v1/articles/42",
 				"method": "DELETE",
 				"header": [
 					{
@@ -282,7 +282,7 @@
 					"mode": "raw",
 					"raw": ""
 				},
-				"description": "Attempt to delete a post that does not exist"
+				"description": "Attempt to delete an article that does not exist"
 			},
 			"response": []
 		}
