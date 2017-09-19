@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class ArticleService {
     private final Map<String, Article> articles = new HashMap<>();
@@ -19,6 +21,7 @@ public class ArticleService {
     public ArticleService() {
         articles.put("1", new Article("1", "Yay", "words", User.USERS.get(0), true, ArticleType.ARTS));
     }
+
     public Collection<Article> getArticles() {
         return articles.values();
     }
@@ -78,5 +81,14 @@ public class ArticleService {
 
     public boolean exists(String articleId) {
         return articles.containsKey(articleId);
+    }
+
+    public Collection<Article> getArticlesByType(String type) {
+        if (type == null) {
+            return getArticles();
+        }
+        ArticleType articleType = ArticleType.valueOf(type);
+        Collection<Article> articles = getArticles();
+        return articles.stream().filter(article -> article.getType().equals(articleType)).collect(toList());
     }
 }

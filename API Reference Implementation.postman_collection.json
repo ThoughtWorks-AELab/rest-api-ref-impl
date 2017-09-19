@@ -31,7 +31,44 @@
 					}
 				],
 				"body": {},
-				"description": "Get all posts"
+				"description": "Get all articles"
+			},
+			"response": []
+		},
+		{
+			"name": "(Authenticated - Alice) GET /articles?type=ARTS",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/v1/articles?type=ARTS",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"articles"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "ARTS",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer qwerty",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get all articles of type 'ARTS'"
 			},
 			"response": []
 		},
@@ -88,7 +125,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"my first awesome article\",\n\t\"body\": \"cashews are the cat's meow\"\n}"
+					"raw": "{\n\t\"title\": \"my first awesome article\",\n\t\"body\": \"cashews are the cat's meow\",\n\t\"type\": \"OPINION\"\n}"
 				},
 				"description": "Create a new article"
 			},
@@ -113,7 +150,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"my first awesome update\",\n\t\"body\": \"almonds are the cat's meow\"\n}"
+					"raw": "{\n\t\"title\": \"my first awesome update\",\n\t\"body\": \"almonds are the cat's meow\",\n\t\"type\": \"OPINION\"\n}"
 				},
 				"description": "Update an existing article"
 			},
@@ -138,7 +175,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"almonds are the cat's meow\"\n}"
+					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"almonds are the cat's meow\",\n\t\"type\": \"OPINION\"\n}"
 				},
 				"description": "As Bob, attempt to update Alice's article"
 			},
@@ -163,7 +200,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"cashews are the cat's meow\"\n}"
+					"raw": ""
 				},
 				"description": "Publish an article"
 			},

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
@@ -39,8 +40,8 @@ public class ArticleController {
     }
 
     @RequestMapping(method = GET)
-    public ResponseEntity<ArticleCollection> getAll() {
-        Collection<Article> articles = articleService.getArticles();
+    public ResponseEntity<ArticleCollection> getAll(@RequestParam(value = "type", required = false) String type) {
+        Collection<Article> articles = articleService.getArticlesByType(type);
         ArticleCollection response = new ArticleCollection(articles);
         return new ResponseEntity<>(response, OK);
     }
