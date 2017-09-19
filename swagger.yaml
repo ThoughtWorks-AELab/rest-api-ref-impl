@@ -170,11 +170,11 @@ components:
           example: 12345-abcdef-qwerty-foobar
         title:
           type: string
-          example: Goto Considered Harmful
+          example: Jake Butt wins toilet paper sponsorship
         body:
           type: string
           example: |
-            To be or not to be, that is the question
+            Michigan tight end Jake Butt looks to move into the NFL with a sponsorship from Charmin
         author:
           $ref: '#/components/schemas/User'
     ArticleRequest:
@@ -196,7 +196,7 @@ components:
       properties:
         body:
           type: string
-          example: great job!
+          example: I can't believe Quilted Northern didn't jump on this opportunity.
         id:
           type: string
         articleId:
@@ -207,7 +207,7 @@ components:
       properties:
         body:
           type: string
-          example: love this article
+          example: I love e-readers! They bring me so many new patients to my optometry practice.
         articleId:
           type: string
           example: 123456-abcdef-qwerty-foobar
@@ -223,7 +223,7 @@ components:
       properties:
         message:
           type: string
-          example: Oops! That is not a valid id
+          example: That article cannot be found.
         error:
           type: string
           example: Forbidden
