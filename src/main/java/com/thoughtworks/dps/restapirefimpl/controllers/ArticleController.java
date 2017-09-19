@@ -29,13 +29,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 public class ArticleController {
 
     ArticleService articleService;
-    private UserService userService;
     private CommentService commentService;
 
     @Autowired
-    public ArticleController(ArticleService articleService, UserService userService, CommentService commentService) {
+    public ArticleController(ArticleService articleService, CommentService commentService) {
         this.articleService = articleService;
-        this.userService = userService;
         this.commentService = commentService;
     }
 

@@ -19,7 +19,10 @@ public class ArticleService {
 
     @Autowired
     public ArticleService() {
-        articles.put("1", new Article("1", "Yay", "words", User.USERS.get(0), true, ArticleType.ARTS));
+        articles.put("1", new Article("1", "An expose on the arts", "Painting forgery reaches an all-time high", User.USERS.get(0), true, ArticleType.ARTS));
+        articles.put("2", new Article("2", "Current affairs", "The world is crashing down", User.USERS.get(0), true, ArticleType.WORLD));
+        articles.put("3", new Article("3", "Jake Butt wins toilet paper sponsorship", "Michigan tight end Jake Butt looks to move into the NFL with a sponsorship from Charmin", User.USERS.get(1), true, ArticleType.SPORTS));
+        articles.put("4", new Article("4", "Are e-readers putting bookstores out of business?", "Local bookstores offer something that the big e-readers can't: community", User.USERS.get(1), true, ArticleType.LITERATURE));
     }
 
     public Collection<Article> getArticles() {
