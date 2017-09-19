@@ -1,6 +1,7 @@
 package com.thoughtworks.dps.restapirefimpl.services;
 
 import com.thoughtworks.dps.restapirefimpl.entities.Article;
+import com.thoughtworks.dps.restapirefimpl.entities.ArticleType;
 import com.thoughtworks.dps.restapirefimpl.resources.ArticleRequest;
 import com.thoughtworks.dps.restapirefimpl.entities.User;
 import com.thoughtworks.dps.restapirefimpl.exceptions.ForbiddenException;
@@ -16,15 +17,14 @@ public class ArticleService {
 
     @Autowired
     public ArticleService() {
-        articles.put("1", new Article("1", "Yay", "words", User.USERS.get(0), false));
+        articles.put("1", new Article("1", "Yay", "words", User.USERS.get(0), true, ArticleType.ARTS));
     }
     public Collection<Article> getArticles() {
         return articles.values();
     }
 
     public Article createArticle(ArticleRequest request, User user) {
-
-        Article article = new Article(UUID.randomUUID().toString(), request.getTitle(), request.getBody(), user, false);
+        Article article = new Article(UUID.randomUUID().toString(), request.getTitle(), request.getBody(), user, true, request.getType());
         articles.put(article.getId(), article);
         return article;
     }
@@ -54,7 +54,8 @@ public class ArticleService {
                         articleRequest.getTitle(),
                         articleRequest.getBody(),
                         user,
-                        articleRequest.isDraft());
+                        articleRequest.isDraft(),
+                        articleRequest.getType());
                 articles.put(id, updatedArticle);
                 return;
             }

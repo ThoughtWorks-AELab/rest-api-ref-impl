@@ -7,13 +7,15 @@ public class Article {
     private final String body;
     private final User author;
     private final boolean draft;
+    private final ArticleType type;
 
-    public Article(String id, String title, String body, User author, boolean draft) {
+    public Article(String id, String title, String body, User author, boolean draft, ArticleType type) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.author = author;
         this.draft = draft;
+        this.type = type;
     }
 
     public String getTitle() {
@@ -32,12 +34,16 @@ public class Article {
         return id;
     }
 
+    public ArticleType getType() {
+        return type;
+    }
+
     public boolean isDraft() {
         return draft;
     }
 
     public Article withDraft(boolean draft) {
-        return new Article(this.id, this.title, this.body, this.author, draft);
+        return new Article(this.id, this.title, this.body, this.author, draft, this.type);
     }
 
 }
