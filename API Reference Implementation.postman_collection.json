@@ -125,7 +125,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"my first awesome article\",\n\t\"body\": \"cashews are the cat's meow\",\n\t\"type\": \"OPINION\"\n}"
+					"raw": "{\n\t\"title\": \"my first awesome article\",\n\t\"body\": \"cashews are the cat's meow\",\n\t\"type\": \"opinion\"\n}"
 				},
 				"description": "Create a new article"
 			},
@@ -150,7 +150,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"my first awesome update\",\n\t\"body\": \"almonds are the cat's meow\",\n\t\"type\": \"OPINION\"\n}"
+					"raw": "{\n\t\"title\": \"my first awesome update\",\n\t\"body\": \"almonds are the cat's meow\",\n\t\"type\": \"opinion\"\n}"
 				},
 				"description": "Update an existing article"
 			},
@@ -175,7 +175,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"almonds are the cat's meow\",\n\t\"type\": \"OPINION\"\n}"
+					"raw": "{\n\t\"title\": \"my first awesome post\",\n\t\"body\": \"almonds are the cat's meow\",\n\t\"type\": \"opinion\"\n}"
 				},
 				"description": "As Bob, attempt to update Alice's article"
 			},
