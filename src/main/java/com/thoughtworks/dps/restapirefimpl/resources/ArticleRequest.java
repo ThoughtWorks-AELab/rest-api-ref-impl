@@ -8,12 +8,12 @@ public class ArticleRequest {
     private final String title;
     private final String body;
     private boolean draft;
-    private final String type;
+    private final ArticleType type;
 
     public ArticleRequest(@JsonProperty("title") String title,
                           @JsonProperty("body") String body,
                           @JsonProperty("draft") boolean draft,
-                          @JsonProperty("type") String type) {
+                          @JsonProperty("type") ArticleType type) {
 
         this.title = title;
         this.body = body;
@@ -34,6 +34,6 @@ public class ArticleRequest {
     }
 
     public ArticleType getType() {
-        return ArticleType.valueOf(type);
+        return type;
     }
 }

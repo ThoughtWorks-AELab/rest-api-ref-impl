@@ -25,6 +25,7 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')
 }

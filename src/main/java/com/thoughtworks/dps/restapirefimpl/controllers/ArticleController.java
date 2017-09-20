@@ -28,7 +28,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("/articles")
 public class ArticleController {
 
-    ArticleService articleService;
+    private ArticleService articleService;
     private CommentService commentService;
 
     @Autowired
@@ -38,7 +38,7 @@ public class ArticleController {
     }
 
     @RequestMapping(method = GET)
-    public ResponseEntity<ArticleCollection> getAll(@RequestParam(value = "type", required = false) String type) {
+    public ResponseEntity<ArticleCollection> getAll(@RequestParam("type") Optional<ArticleType> type) {
         Collection<Article> articles = articleService.getArticlesByType(type);
         ArticleCollection response = new ArticleCollection(articles);
         return new ResponseEntity<>(response, OK);

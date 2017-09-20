@@ -1,5 +1,8 @@
 # API Reference Implementation
 
+## How to run
+`./gradlew bootRun`
+
 ## What's Next
 
 What's a reference implementation? Here's our defn - max

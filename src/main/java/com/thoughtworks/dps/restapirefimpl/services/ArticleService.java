@@ -45,7 +45,7 @@ public class ArticleService {
         if (!article.isPresent()) {
             return article;
         }
-        if (article.get().getAuthor().equals(user)) {
+        if (article.get().ownedBy(user)) {
             articles.remove(id);
             return article;
         }
@@ -53,46 +53,49 @@ public class ArticleService {
     }
 
     public void updateArticle(String id, ArticleRequest articleRequest, User user) {
-        Optional<Article> article = Optional.ofNullable(articles.get(id));
-        if (article.isPresent()) {
-            if (article.get().getAuthor().equals(user)) {
-                Article updatedArticle = new Article(
-                        id,
-                        articleRequest.getTitle(),
-                        articleRequest.getBody(),
-                        user,
-                        articleRequest.isDraft(),
-                        articleRequest.getType());
-                articles.put(id, updatedArticle);
-                return;
-            }
+        Optional<Article> maybeArticle = Optional.ofNullable(articles.get(id));
+        if (!maybeArticle.isPresent()) {
+            throw new NotFoundException();
+        }
+        Article article = maybeArticle.get();
+        if (!article.ownedBy(user)) {
             throw new ForbiddenException();
         }
-        throw new NotFoundException();
+        Article updatedArticle = new Article(
+                id,
+                articleRequest.getTitle(),
+                articleRequest.getBody(),
+                user,
+                articleRequest.isDraft(),
+                articleRequest.getType());
+        articles.put(id, updatedArticle);
+
+
     }
 
     public void publish(String id, User user) {
         Optional<Article> article = Optional.ofNullable(articles.get(id));
-        if (article.isPresent()) {
-            if (article.get().getAuthor().equals(user)) {
-                articles.put(id, article.get().withDraft(false));
-                return;
-            }
+        if (!article.isPresent()) {
+            throw new NotFoundException();
+        }
+        Article foundArticle = article.get();
+        if (!foundArticle.ownedBy(user)) {
             throw new ForbiddenException();
         }
-        throw new NotFoundException();
+        articles.put(id, foundArticle.withDraft(false));
     }
 
     public boolean exists(String articleId) {
         return articles.containsKey(articleId);
     }
 
-    public Collection<Article> getArticlesByType(String type) {
-        if (type == null) {
-            return getArticles();
-        }
-        ArticleType articleType = ArticleType.valueOf(type);
+    public Collection<Article> getArticlesByType(Optional<ArticleType> type) {
         Collection<Article> articles = getArticles();
-        return articles.stream().filter(article -> article.getType().equals(articleType)).collect(toList());
+        if (type.isPresent()) {
+            return articles.stream().filter(a -> a.isOfType(type.get())).collect(toList());
+        } else {
+            return articles;
+        }
     }
+
 }

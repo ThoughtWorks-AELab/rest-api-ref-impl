@@ -23,7 +23,7 @@ public class UserController {
     @RequestMapping(path = "/current", method = GET)
     public ResponseEntity<User> getCurrent(Principal principal) {
         User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
-        return new ResponseEntity<User>(user, OK);
+        return new ResponseEntity<>(user, OK);
     }
 
 }

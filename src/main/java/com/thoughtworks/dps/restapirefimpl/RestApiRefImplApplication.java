@@ -1,5 +1,6 @@
 package com.thoughtworks.dps.restapirefimpl;
 
+import com.thoughtworks.dps.restapirefimpl.config.ArticleTypeConverter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;

@@ -46,4 +46,11 @@ public class Article {
         return new Article(this.id, this.title, this.body, this.author, draft, this.type);
     }
 
+    public boolean ownedBy(User user) {
+        return getAuthor().equals(user);
+    }
+
+    public boolean isOfType(ArticleType type) {
+        return this.type.equals(type);
+    }
 }
