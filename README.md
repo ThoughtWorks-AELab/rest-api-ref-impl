@@ -1,15 +1,14 @@
 # API Reference Implementation
 
+## Prerequisites
+
+To run this reference implementation, you must have downloaded and installed:
+
+* Java 8
+* Postman
+
 ## How to run
 `./gradlew bootRun`
-
-## What's Next
-
-What's a reference implementation? Here's our defn - max
-What this is not - an accelerator or starter kit
-Clean up swagger - elise
-Add blurby bit - max
-Code commenting - max
 
 ### Documentation
 
